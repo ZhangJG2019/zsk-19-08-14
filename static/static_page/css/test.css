@@ -1,0 +1,48 @@
+#searchShop {
+
+    line-height: 28px;
+    text-indent: 5px;
+    width: 180px;
+    float: left ;
+    height: 28px;
+    border: none;
+}
+
+.searchShopBtn {
+    font-size: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #eff3f6;
+    background-repeat: no-repeat;
+    background-position: 8px 5px;
+}
+
+.searchIcon {
+    /* //小的搜索图标 */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAGXRFW…07gDgaiP9C+Y2UpKM1QJwIxB+hwQAGjNQqj5gYqAQAAgwAkpg6e/xOfYMAAAAASUVORK5CYII=);
+}
+
+/*查询结果对应的显示框css*/
+.searchResult {
+    position: absolute;
+    top: 47px;
+    right: 70px;
+    width: 180px;
+    border: 1px solid #e4e7ee;
+    border-top: 0;
+    border-bottom: 0;
+    background: #fff;
+    max-height: 279px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 2;
+}
+
+/*列表都是li组成css*/
+.searchResult li {
+    border-bottom: 1px solid #e4e7ee;
+    line-height: 30px;
+    padding-left: 4px;
+    width: 176px;
+    list-style: none;
+}

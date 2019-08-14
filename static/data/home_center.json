@@ -1,0 +1,11 @@
+[{
+  "genenum": 123,
+  "drugnum": 456,
+  "drugGenePairnum": 789,
+  "authoritynum": 1314,
+  "drugLabelsnum": 520,
+  "clinicalNotesnum": 521,
+  "clinicalTrialsnum": 999,
+  "patentnum": 666
+}
+]

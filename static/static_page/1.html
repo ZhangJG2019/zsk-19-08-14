@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>ADVANCED CSS3 STYLING OF SELECT ELEMENT (DROP-DOWN)</title>
+        <link rel="stylesheet" href="./app.css">
+        <link rel="stylesheet" href="./index.new2.css">
+    
+    </head>
+    
+    <body>
+    
+    
+    
+    
+        <div class="search-box">
+            <span class="ui-dropdown-select ui-dropdown open" style="width: 80px;"><i class="ui-dropdown-arrow"></i><a
+                    href="javascript:;" data-widget="dropdown" class="ui-dropdown-select-name" aria-expanded="true">知识库</a>
+                <div class="ui-dropdown-menu" style="min-width: 78px;">
+                    <ul>
+                        <li data-value="1" class="selected"><a href="javascript:;">知识库</a></li>
+                        <li data-value="2"><a href="javascript:;">精准用药</a></li>
+                        <li data-value="3"><a href="javascript:;">其他</a></li>
+                    </ul>
+                </div>
+                <select class="search-type-select ignore-focus" name="btn_jiansuo" data-widget="dropdownSelect"
+                    style="display: none;">
+                    <option value="1" data-action="//db.yaozh.com/Search" data-key="content">知识库</option>
+                    <option value="2" data-action="//s.yaozh.com/Index/search" data-key="search">精准用药</option>
+                    <option value="3" data-action="//www.yaozh.com/list/" data-key="keytitle">其他</option>
+                </select>
+            </span>
+            <input class="search ignore-focus" name="content" type="text">
+            <a href="javascript:;" class="search-btn">搜索</a>
+        </div>
+    
+    
+    
+    
+    
+    
+                            <div class="search-box">
+                                <span class="ui-dropdown-select ui-dropdown" style="width: 80px;"><i class="ui-dropdown-arrow"></i><a
+                                        href="javascript:;" data-widget="dropdown" class="ui-dropdown-select-name">数据库</a>
+                                    <div class="ui-dropdown-menu" style="min-width: 78px;">
+                                        <ul>
+                                            <li data-value="1" class="selected"><a href="javascript:;">数据库</a></li>
+                        <li data-value="2"><a href="javascript:;">药智通</a></li>
+                        <li data-value="3"><a href="javascript:;">药智汇</a></li>
+                    </ul>
+                </div><select class="search-type-select ignore-focus" name="btn_jiansuo" data-widget="dropdownSelect"
+                    style="display: none;">
+                                      <option value="1" data-action="//db.yaozh.com/Search" data-key="content">数据库</option>
+                    <option value="2" data-action="//s.yaozh.com/Index/search" data-key="search">药智通</option>
+                    <option value="3" data-action="//www.yaozh.com/list/" data-key="keytitle">药智汇</option>
+                    <!-- <option value="4" data-action="//bbs.yaozh.com/search.php?searchsubmit=yes" data-key="srchtxt">论坛</option> -->
+                </select>
+            </span>
+            <input class="search ignore-focus" name="content" type="text">
+            <a href="javascript:;" class="search-btn">搜索</a>
+        </div>
+</body>
+</html>

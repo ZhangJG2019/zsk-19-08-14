@@ -1,0 +1,32 @@
+[{  
+    "id":"1",
+    "articleTitle": "更新说明",
+    "articleLinkUrl": "../../static/static_page/noticedetails.html",
+    "columnTitle": "公告",
+    "columnLinkUrl": "../../static/static_page/notice.html"
+  },{
+    "id":"2",
+    "articleTitle": "浏览数据量",
+    "articleLinkUrl": "../../static/static_page/noticedetails.html",
+    "columnTitle": "公告",
+    "columnLinkUrl": "../../static/static_page/notice.html"
+  },{
+    "id":"3",
+    "articleTitle": "导出数据",
+    "articleLinkUrl": "../../static/static_page/noticedetails.html",
+    "columnTitle": "公告",
+    "columnLinkUrl": "../../static/static_page/notice.html"
+  },{
+    "id":"4",
+    "articleTitle": "版本更新",
+    "articleLinkUrl": "../../static/static_page/noticedetails.html",
+    "columnTitle": "公告",
+    "columnLinkUrl": "../../static/static_page/notice.html"
+  },{
+    "id":"5",
+    "articleTitle": "用户量/词条量",
+    "articleLinkUrl": "../../static/static_page/noticedetails.html",
+    "columnTitle": "公告",
+    "columnLinkUrl": "../../static/static_page/notice.html"
+}
+]
