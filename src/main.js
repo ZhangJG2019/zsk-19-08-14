@@ -35,7 +35,9 @@ import {
   Tag,
   Form,
   FormItem,
-  CheckboxGroup
+  CheckboxGroup,
+  Row,
+  Col
 } from 'element-ui'
 import {
   getStore
@@ -65,6 +67,8 @@ Vue.use(CheckboxGroup)
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$notify = Notification
 Vue.prototype.$message = Message
+Vue.use(Row)
+Vue.use(Col)
 Vue.use(infiniteScroll)
 Vue.use(VueCookie)
 Vue.use(VueResource)
@@ -75,7 +79,7 @@ Vue.use(VueLazyload, {
   // attempt: 1
 })
 Vue.config.productionTip = false
-const whiteList = ['/home', '/login', '/register', '/search', '/taskhall'] // 不需要登陆的页面
+const whiteList = ['/home', '/gene', '/login', '/register', '/search', '/taskhall', '/forgetpwd'] // 不需要登陆的页面
 router.beforeEach(function (to, from, next) {
   if (getStore('token')) {
     let params = {

@@ -5,7 +5,7 @@
     </y-header>
     <div class="w">
       <div class="content">
-        <div class="account-sidebar">
+        <!-- <div class="account-sidebar">
           <div class="avatar gray-box ">
             <div>
               <img :src="userInfo.info.file" />
@@ -26,8 +26,13 @@
               </ul>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="account-content">
+          <router-view></router-view>
+          <router-view></router-view>
+          <router-view></router-view>
+          <router-view></router-view>
+          <router-view></router-view>
           <router-view></router-view>
         </div>
       </div>
@@ -43,7 +48,7 @@ export default {
   data() {
     return {
       title: '我的订单6666',
-      nav: [{ name: '账户资料', path: 'information' }],
+      nav: [{ name: '用户资料', path: 'information' }],
       editAvatar: true
     }
   },

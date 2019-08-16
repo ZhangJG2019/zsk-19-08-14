@@ -16,6 +16,14 @@ export const userInfo = (params) => {
 export const regist = (params) => {
   return http.fetchPost('/front/regist', params)
 }
+// 重置密码
+export const resetpwd = (params) => {
+  return http.fetchPost('/front/resetPW', params)
+}
+// 发送留言
+export const sendmsg = (params) => {
+  return http.fetchPost('/front/send/email', params)
+}
 // 上传图片
 export const upload = (params) => {
   return http.fetchPost('/front/imgaeUpload', params)

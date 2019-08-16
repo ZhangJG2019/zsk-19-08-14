@@ -42,19 +42,11 @@
               <el-checkbox class="auto-login" v-model="autoLogin"
                 >记住密码</el-checkbox
               >
-              <a href="#/home" class="register">首页</a>
-              <!-- <span class="pa" style="top: 0;left: 0;color: #d44d44">{{ruleForm.errMsg}}</span> -->
+              <a class="register" @click="home">首页</a>
               <a href="javascript:;" class="register" @click="toRegister"
                 >注册 三济生物 账号</a
               >
-              <a
-                style="padding: 1px 0 0 10px"
-                @click="
-                  open(
-                    '找回密码',
-                    '请联系作者邮箱找回密码或使用测试账号登录：test | test'
-                  )
-                "
+              <a href="javascript:;" class="register" @click="toForgotpwd"
                 >忘记密码 ?</a
               >
             </li>
@@ -166,6 +158,17 @@ export default {
       this.$router.push({
         path: '/register'
       })
+    },
+    // 跳转到忘记密码页
+    toForgotpwd() {
+      window.location.href = '/#/forgetpwd'
+      // this.$router.push({
+      //   path: '/pwd'
+      // })
+    },
+    // 跳转到首页
+    home() {
+      window.location.href = '/'
     },
     // 登录返回按钮
     login_back() {

@@ -49,7 +49,11 @@
                 >
               </h2>
               <ul>
-                <li class="center_content" style="background-color:#fe6181;">
+                <li
+                  class="center_content"
+                  style="background-color:#fe6181;"
+                  @click="gene"
+                >
                   <!-- <li class="center_content"> -->
                   <img src="../../../static/images/jiyin.png" alt="" />
                   <a href="" class="title">基因</a>
@@ -57,41 +61,65 @@
                   <a class="num" v-text="genenum">123</a>
                 </li>
                 <!-- <li class="center_content"> -->
-                <li class="center_content" style="background-color:#5fc46d;">
+                <li
+                  class="center_content"
+                  style="background-color:#5fc46d;"
+                  @click="gene"
+                >
                   <img src="../../../static/images/xianguanyaowu.png" alt="" />
                   <a href="" class="title">药物</a>
                   <!-- <a class="num">456</a> -->
                   <a class="num" v-text="drugnum">456</a>
                 </li>
-                <li class="center_content" style="background-color:#6661d5;">
+                <li
+                  class="center_content"
+                  style="background-color:#6661d5;"
+                  @click="gene"
+                >
                   <!-- <li class="center_content"> -->
                   <img src="../../../static/images/yaowujiyindui.png" alt="" />
                   <a href="" class="title">药物基因对</a>
                   <!-- <a class="num">789</a> -->
                   <a class="num" v-text="drugGenePairnum">789</a>
                 </li>
-                <li class="center_content" style="background-color:#01c4c3;">
+                <li
+                  class="center_content"
+                  style="background-color:#01c4c3;"
+                  @click="gene"
+                >
                   <!-- <li class="center_content"> -->
                   <img src="../../../static/images/quanweizhinan.png" alt="" />
                   <a href="" class="title">权威指南</a>
                   <!-- <a class="num">987</a> -->
                   <a class="num" v-text="authoritynum">987</a>
                 </li>
-                <li class="center_content" style="background-color:#62b6e5;">
+                <li
+                  class="center_content"
+                  style="background-color:#62b6e5;"
+                  @click="gene"
+                >
                   <!-- <li class="center_content"> -->
                   <img src="../../../static/images/yaowubiaoqian.png" alt="" />
                   <a href="" class="title">药物标签</a>
                   <!-- <a class="num">654</a> -->
                   <a class="num" v-text="drugLabelsnum">654</a>
                 </li>
-                <li class="center_content" style="background-color:#ff6765;">
+                <li
+                  class="center_content"
+                  style="background-color:#ff6765;"
+                  @click="gene"
+                >
                   <!-- <li class="center_content"> -->
                   <img src="../../../static/images/linchuangzhushi.png" />
                   <a href="" class="title">临床注释</a>
                   <!-- <a class="num">321</a> -->
                   <a class="num" v-text="clinicalNotesnum">321</a>
                 </li>
-                <li class="center_content" style="background-color:#7dc691;">
+                <li
+                  class="center_content"
+                  style="background-color:#7dc691;"
+                  @click="gene"
+                >
                   <!-- <li class="center_content"> -->
                   <img
                     src="../../../static/images/linchuangshiyan.png"
@@ -101,7 +129,11 @@
                   <!-- <a class="num">1314</a> -->
                   <a class="num" v-text="clinicalTrialsnum">1314</a>
                 </li>
-                <li class="center_content" style="background-color:#feab1c;">
+                <li
+                  class="center_content"
+                  style="background-color:#feab1c;"
+                  @click="gene"
+                >
                   <!-- <li class="center_content"> -->
                   <img src="../../../static/images/zhuanli.png" alt="" />
                   <a href="" class="title">专利</a>
@@ -152,33 +184,52 @@
               </h2>
               <div class="right_bottom">
                 <el-form
-                  ref="form"
+                  ref="sizeForm"
                   :model="sizeForm"
                   label-width="80px"
                   size="large"
                   label-position="top"
                 >
                   <el-form-item
-                    label="昵称:"
-                    prop="name"
+                    label="邮箱:"
+                    prop="email"
                     style="font-size:18px"
                   >
                     <el-input
-                      v-model="sizeForm.name"
-                      placeholder="请输入您的昵称："
+                      v-model="sizeForm.email"
+                      placeholder="请输入邮箱："
                     ></el-input>
                   </el-form-item>
-                  <el-form-item label="留言内容:" prop="textarea">
+                  <el-form-item label="留言内容:" prop="msgcontent">
                     <el-input
-                      v-model="sizeForm.textarea"
+                      v-model="sizeForm.msgcontent"
                       placeholder="请输入留言内容"
                       type="textarea"
                       :rows="2"
+                      :maxlength="100"
                     >
                     </el-input>
                   </el-form-item>
-                  <el-form-item>
-                    <el-button size=" small" type="primary">提交</el-button>
+                  <el-form-item style="margin-top:20px;">
+                    <input
+                      type="text"
+                      value=""
+                      placeholder="请输入验证码"
+                      class="input-val"
+                      style="width:90px;height:30px;border:1px solid #bfcbd9;vertical-align:middle;margin-left: 10px;"
+                    />
+                    <canvas
+                      id="canvas"
+                      style="width:100px;height:30px;border:1px solid #bfcbd9;vertical-align:middle"
+                    ></canvas>
+                    <el-button
+                      style="float:right;margin-right:10px;"
+                      class="btn"
+                      size=" small"
+                      type="primary"
+                      @click="sentemail('sizeForm')"
+                      >提交</el-button
+                    >
                   </el-form-item>
                 </el-form>
               </div>
@@ -239,6 +290,7 @@
 </template>
 <script>
 import YShelf from '/components/shelf'
+import { sendmsg } from '/api/index.js'
 import 'element-ui'
 import 'jquery'
 import axios from 'axios'
@@ -290,8 +342,8 @@ export default {
       dialogVisible: false,
       timer: '',
       sizeForm: {
-        textarea: '',
-        name: ''
+        email: '',
+        msgcontent: ''
       },
       // 接收最新事件列表信息
       topNews: [],
@@ -302,6 +354,49 @@ export default {
     }
   },
   methods: {
+    // 发送留言
+    sentemail(sizeForm) {
+      this.$refs[sizeForm].validate(valid => {
+        if (valid) {
+          let data = new FormData()
+          data.append('email', this.sizeForm.email)
+          data.append('msgcontent', this.sizeForm.msgcontent)
+          sendmsg(data)
+            .then(res => {
+              if (res.status === 1) {
+                this.$message({
+                  message: res.message,
+                  type: 'success'
+                })
+                this.sizeForm.email = null
+                this.sizeForm.msgcontent = null
+                return
+              } else {
+                this.$message.error(res.message)
+                return
+              }
+            })
+            .catch(res => {
+              this.$message({
+                message: res.message,
+                type: 'error'
+              })
+            })
+        } else {
+          this.$message({
+            message: '请补全信息',
+            type: 'error'
+          })
+          return false
+        }
+      })
+    },
+    // 基因
+    gene() {
+      this.$router.push({
+        path: '/gene'
+      })
+    },
     // 获取各分类标签数量
     getNum() {
       var url = 'static/data/home_center.json'
@@ -371,6 +466,110 @@ export default {
     }
   },
   mounted() {
+    // 留言动态验证码
+    $(function() {
+      // eslint-disable-next-line camelcase
+      var show_num = []
+      draw(show_num)
+      $('#canvas').on('click', function() {
+        draw(show_num)
+      })
+      $('.btn').on('click', function() {
+        var val = $('.input-val')
+          .val()
+          .toLowerCase()
+        var num = show_num.join('')
+        // eslint-disable-next-line eqeqeq
+        if (val == '') {
+          this.$message({
+            message: '请输入验证码',
+            type: 'error'
+          })
+          // eslint-disable-next-line eqeqeq
+        } else if (val == num) {
+          $('.input-val').val('')
+          // draw(show_num);
+        } else {
+          this.$message({
+            message: '验证码错误！请重新输入！',
+            type: 'error'
+          })
+          $('.input-val').val('')
+          // draw(show_num);
+        }
+      })
+    })
+    // 生成并渲染出验证码图形
+    // eslint-disable-next-line camelcase
+    function draw(show_num) {
+      // eslint-disable-next-line camelcase
+      var canvas_width = $('#canvas').width()
+      // eslint-disable-next-line camelcase
+      var canvas_height = $('#canvas').height()
+      var canvas = document.getElementById('canvas') // 获取到canvas的对象，演员
+      var context = canvas.getContext('2d') // 获取到canvas画图的环境，演员表演的舞台
+      // eslint-disable-next-line camelcase
+      canvas.width = canvas_width
+      // eslint-disable-next-line camelcase
+      canvas.height = canvas_height
+      var sCode =
+        'a,b,c,d,e,f,g,h,i,j,k,m,n,p,q,r,s,t,u,v,w,x,y,z,A,B,C,E,F,G,H,J,K,L,M,N,P,Q,R,S,T,W,X,Y,Z,1,2,3,4,5,6,7,8,9,0'
+      var aCode = sCode.split(',')
+      var aLength = aCode.length // 获取到数组的长度
+      for (var i = 0; i < 4; i++) {
+        // 这里的for循环可以控制验证码位数（如果想显示6位数，4改成6即可）
+        var j = Math.floor(Math.random() * aLength) // 获取到随机的索引值
+        // var deg = Math.random() * 30 * Math.PI / 180;//产生0~30之间的随机弧度
+        var deg = Math.random() - 0.5 // 产生一个随机弧度
+        var txt = aCode[j] // 得到随机的一个内容
+        show_num[i] = txt.toLowerCase()
+        var x = 10 + i * 20 // 文字在canvas上的x坐标
+        var y = 20 + Math.random() * 8 // 文字在canvas上的y坐标
+        context.font = 'bold 23px 微软雅黑'
+        context.translate(x, y)
+        context.rotate(deg)
+        context.fillStyle = randomColor()
+        context.fillText(txt, 0, 0)
+        context.rotate(-deg)
+        context.translate(-x, -y)
+      }
+      // eslint-disable-next-line no-redeclare
+      for (var i = 0; i <= 5; i++) {
+        // 验证码上显示线条
+        context.strokeStyle = randomColor()
+        context.beginPath()
+        context.moveTo(
+          // eslint-disable-next-line camelcase
+          Math.random() * canvas_width,
+          // eslint-disable-next-line camelcase
+          Math.random() * canvas_height
+        )
+        context.lineTo(
+          // eslint-disable-next-line camelcase
+          Math.random() * canvas_width,
+          // eslint-disable-next-line camelcase
+          Math.random() * canvas_height
+        )
+        context.stroke()
+      }
+      // eslint-disable-next-line no-redeclare
+      for (var i = 0; i <= 30; i++) {
+        // 验证码上显示小点
+        context.strokeStyle = randomColor()
+        context.beginPath()
+        var x = Math.random() * canvas_width
+        context.moveTo(x, y)
+        context.lineTo(x + 1, y + 1)
+        context.stroke()
+      }
+    }
+    // 得到随机的颜色值
+    function randomColor() {
+      var r = Math.floor(Math.random() * 256)
+      var g = Math.floor(Math.random() * 256)
+      var b = Math.floor(Math.random() * 256)
+      return 'rgb(' + r + ',' + g + ',' + b + ')'
+    }
     // 背景添加函数
     function bgc(color, tagName) {
       $(tagName).each(function(i, e) {
@@ -408,7 +607,7 @@ export default {
   }
 }
 </script>
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss" rel="stylesheet/scss" scoped>
 // 自己加的
 // .notice_num {//具体数据在展开
 //   float: right;
@@ -457,14 +656,14 @@ export default {
   text-decoration: none;
 }
 .news h2 strong {
-  font: bold 16px 'microsoft yahei';
+  font: bold 20px 'microsoft yahei';
   height: 56px;
   padding: 0px 24px;
   box-sizing: border-box;
 }
 .news h2 strong:hover {
   border-bottom: 3px solid #417eec;
-  padding-bottom: 15px;
+  padding-bottom: 14px;
 }
 .left_content {
   border: 1px solid #ddd;
@@ -493,7 +692,6 @@ export default {
 }
 .news ul li a {
   color: #666;
-  font-weight: 700;
 }
 .news ul .new_content:nth-child(1),
 .news ul .new_content:nth-child(2),
@@ -502,7 +700,7 @@ export default {
   height: 30px;
   line-height: 30px;
   display: inline-block;
-  padding-left: 12px;
+  padding-left: 10px;
   box-sizing: border-box;
   margin-right: 5px;
 }
@@ -536,15 +734,16 @@ export default {
   margin: 20px 0 0 0;
   box-sizing: border-box;
   position: relative;
+  cursor: pointer;
 }
 .slide_center ul li:nth-of-type(even) {
   margin-left: 20px !important;
 }
-.slide_center ul .title {
+.slide_center ul li a.title {
   position: absolute;
   bottom: 5px;
   left: 15px;
-  font-size: 17px;
+  font-size: 24px;
   color: white;
 }
 .slide_center ul .num {

@@ -5,7 +5,9 @@
         <div class="w-box">
           <div class="nav-logo">
             <h1 @click="changePage(-1)">
-              <router-link to="/" title="三济生物官网">三济生物</router-link>
+              <router-link to="/home" title="三济生物官网"
+                >三济生物</router-link
+              >
             </h1>
           </div>
           <div class="right-box">
@@ -263,9 +265,14 @@ export default {
           removeStore('token')
           removeStore('rusername')
           removeStore('rpassword')
-          window.location.href = '/'
+          localStorage.clear()
+          // window.location.href = '/'
+          // window.location.href = '#/login'
+          this.$router.push({ path: '/login' })
         })
-        .catch(res => {})
+        .catch(res => {
+          alert('请使用正确退出方式')
+        })
     },
     // 通过路由改变导航文字样式
     getPage() {
@@ -278,11 +285,6 @@ export default {
       } else {
         this.changePage(0)
       }
-    },
-    openProduct(productId) {
-      window.open(
-        '//' + window.location.host + '/#/goodsDetails?productId=' + productId
-      )
     }
   },
   mounted() {
@@ -388,8 +390,10 @@ export default {
 
 .header-box {
   background: $head-bgc;
-  background-image: -webkit-linear-gradient(#000, #121212);
-  background-image: linear-gradient(#000, #121212);
+  // background-image: -webkit-linear-gradient(#000, #121212);
+  background-image: -webkit-linear-gradient(#427eec, #6fb3f7);
+  // background-image: linear-gradient(#000, #121212);
+  background-image: linear-gradient(#427eec, #6fb3f7);
   width: 100%;
 }
 

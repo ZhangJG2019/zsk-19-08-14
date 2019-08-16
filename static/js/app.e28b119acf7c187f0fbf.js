@@ -482,8 +482,8 @@ webpackJsonp([26], {
           component: v
         }]
       }, {
-        path: '/taskhall',
-        name: 'taskhall',
+        path: '/checkout',
+        name: 'checkout',
         component: I
       }, {
         path: '*',

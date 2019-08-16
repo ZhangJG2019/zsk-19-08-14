@@ -3,7 +3,9 @@ import Router from 'vue-router'
 const Index = () => import('/page/index.vue')
 const Login = () => import('/page/Login/login.vue')
 const register = () => import('/page/Login/register.vue')
+const forgetpwd = () => import('/page/Login/forgetpwd.vue')
 const Home = () => import('/page/Home/home.vue')
+const Gene = () => import('/page/Home/gene.vue')
 const order = () => import('/page/Order/order.vue')
 const user = () => import('/page/User/user.vue')
 const information = () => import('/page/User/children/information.vue')
@@ -23,13 +25,17 @@ export default new Router({
         path: 'home',
         component: Home
       },
-
       {
         path: '/refreshgoods',
         name: 'refreshgoods',
         component: RefreshGoods
       }
       ]
+  },
+  {
+    path: '/gene',
+    name: 'gene',
+    component: Gene
   },
   {
     path: '/login',
@@ -40,6 +46,11 @@ export default new Router({
     path: '/register',
     name: 'register',
     component: register
+  },
+  {
+    path: '/forgetpwd',
+    name: 'forgetpwd',
+    component: forgetpwd
   },
   {
     path: '/refreshsearch',
@@ -63,7 +74,7 @@ export default new Router({
     redirect: '/user/information',
     children: [{
         path: 'information',
-        name: '账户资料',
+        name: '用户资料',
         component: information
       }]
   },

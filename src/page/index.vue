@@ -80,7 +80,7 @@ export default {
 @import '../assets/style/mixin';
 
 .main {
-  min-height: calc(100vh - 454px);
+  min-height: calc(100vh - 754px);
   background: #ededed;
   overflow: hidden;
   width: 100%;

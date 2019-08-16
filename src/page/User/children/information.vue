@@ -1,103 +1,9 @@
 <template>
   <div>
-    <y-shelf title="账户资料">
+    <y-shelf title="用户资料">
       <div slot="content">
         <div class="avatar-box">
-          <div class="img-box"><img :src="userInfo.info.file" alt="" /></div>
-          <div class="r-box">
-            <h3 style="margin-left: 13px;">修改头像</h3>
-            <y-button
-              text="上传头像"
-              classStyle="main-btn"
-              style="margin: 0;"
-              @btnClick="editAvatar()"
-            ></y-button>
-          </div>
-        </div>
-        <div class="edit-avatar" v-if="editAvatarShow">
-          <y-shelf title="设置头像">
-            <span slot="right">
-              <span class="close" @click="editAvatarShow = false">
-                <svg
-                  t="1501234940517"
-                  class="icon"
-                  style=""
-                  viewBox="0 0 1024 1024"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  p-id="3014"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                  width="20"
-                  height="20"
-                >
-                  <path
-                    d="M941.576 184.248l-101.824-101.824L512 410.176 184.248 82.424 82.424 184.248 410.168 512l-327.744 327.752 101.824 101.824L512 613.824l327.752 327.752 101.824-101.824L613.832 512z"
-                    fill="#cdcdcd"
-                    p-id="3015"
-                  ></path>
-                </svg>
-              </span>
-            </span>
-            <div slot="content" class="content">
-              <div class="edit-l">
-                <div
-                  style="width: 100px;height: 100px;border: 1px solid #ccc;margin-bottom: 20px;overflow: hidden;"
-                >
-                  <div
-                    class="show-preview"
-                    :style="{
-                      width: previews.w + 'px',
-                      height: previews.h + 'px',
-                      overflow: 'hidden',
-                      zoom: option.zoom
-                    }"
-                  >
-                    <div :style="previews.div">
-                      <img :src="option.img" :style="previews.img" />
-                    </div>
-                  </div>
-                </div>
-                <div style="padding: 10px 0 ">头像预览</div>
-                <div class="btn">
-                  <a href="javascript:;">重新选择</a>
-                  <input type="file" value="上传头像" @change="upimg($event)" />
-                </div>
-              </div>
-              <div class="edit-r">
-                <div>
-                  <div class="big" id="cropper-target" v-if="option.img">
-                    <vueCropper
-                      :img="option.img"
-                      @realTime="realTime"
-                      ref="cropper"
-                      :outputSize="example2.size"
-                      :info="example2.info"
-                      :canScale="example2.canScale"
-                      :autoCrop="example2.autoCrop"
-                      :autoCropWidth="example2.width"
-                      :autoCropHeight="example2.height"
-                      :fixed="example2.fixed"
-                    ></vueCropper>
-                  </div>
-                </div>
-              </div>
-              <div class="bootom-btn pa">
-                <y-button
-                  style="width: 140px;height: 40px;line-height: 40px"
-                  text="取消"
-                  @btnClick="editAvatarShow = false"
-                >
-                </y-button>
-                <y-button
-                  style="width: 140px;height: 40px;line-height: 40px"
-                  text="确定"
-                  classStyle="main-btn"
-                  @btnClick="cropper"
-                >
-                </y-button>
-              </div>
-            </div>
-          </y-shelf>
+          <p style="font-size:20px;">姓名:admin <br /><br />性别:男</p>
         </div>
       </div>
     </y-shelf>
@@ -105,7 +11,6 @@
 </template>
 <script>
 import YButton from '/components/YButton'
-import { upload } from '/api/index'
 import YShelf from '/components/shelf'
 import vueCropper from 'vue-cropper'
 import { mapState, mapMutations } from 'vuex'
@@ -113,27 +18,6 @@ import { getStore } from '/utils/storage'
 export default {
   data() {
     return {
-      imgSrc: '',
-      editAvatarShow: false,
-      cropContext: '',
-      cropperImg: '',
-      previews: {},
-      option: {
-        img: '',
-        zoom: 0
-      },
-      fixedNumber: [1, 1],
-      example2: {
-        info: true,
-        size: 1,
-        canScale: false,
-        autoCrop: true,
-        // 只有自动截图开启 宽度高度才生效
-        autoCropWidth: 300,
-        autoCropHeight: 250,
-        // 开启宽度和高度比例
-        fixed: true
-      },
       userId: '',
       token: ''
     }
@@ -156,56 +40,6 @@ export default {
       this.$message.error({
         message: m
       })
-    },
-    upimg(e) {
-      var file = e.target.files[0]
-      if (file.size > 1048576) {
-        this.messageFail('图片大小不得超过1Mb')
-        return false
-      }
-      if (!/\.(gif|jpg|jpeg|png|bmp|GIF|JPG|PNG)$/.test(e.target.value)) {
-        this.messageFail('图片类型仅支持.gif,jpeg,jpg,png,bmp')
-        return false
-      }
-      var reader = new FileReader()
-      reader.readAsDataURL(file)
-      reader.onload = e => {
-        this.option.img = e.target.result
-      }
-    },
-    cropper() {
-      this.message('上传中...')
-      if (this.option.img) {
-        this.$refs.cropper.getCropData(data => {
-          this.imgSrc = data
-          upload({
-            userId: this.userId,
-            token: this.token,
-            imgData: data
-          }).then(res => {
-            if (res.success === true) {
-              let path = res.result
-              let info = this.userInfo
-              info.file = path
-              this.RECORD_USERINFO({ info: info })
-              this.editAvatarShow = false
-              this.messageSuccess('上传成功')
-            } else {
-              this.messageFail(res.message)
-            }
-          })
-        })
-      } else {
-        this.messageFail('请先选照骗')
-      }
-    },
-    editAvatar() {
-      this.editAvatarShow = true
-    },
-    realTime(data) {
-      this.previews = data
-      let w = 100 / data.w
-      this.option.zoom = w
     }
   },
   created() {
@@ -279,8 +113,8 @@ export default {
     text-shadow: rgba(255, 255, 255, 0.496094) 0 1px 0;
     border: 1px solid #e6e6e6;
     border-radius: 10px;
-    &:hover {
-    }
+    // &:hover {
+    // }
     a {
       color: #666;
       display: block;
